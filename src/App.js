@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./app.css";
+import Home from "./Route/Home";
+import AboutPage from "./Route/About";
+import RootLayout from "./Route/Root";
+import EventPage from "./Route/Event";
+import CausesPage from "./Route/Causes";
+import Pages from "./Route/Pages";
+import BlogPage from "./Route/Blog";
+import ContactPage from "./Route/Contact";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/aboutus", element: <AboutPage /> },
+      { path: "/causes", element: <CausesPage /> },
+      { path: "/events", element: <EventPage /> },
+      { path: "/pages", element: <Pages /> },
+      { path: "/blog", element: <BlogPage /> },
+      { path: "/contact", element: <ContactPage /> },
+    ],
+  },
+]);
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <RouterProvider router={router} />
+    </Fragment>
   );
 }
 
